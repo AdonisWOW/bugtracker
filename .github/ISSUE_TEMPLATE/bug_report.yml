@@ -1,0 +1,130 @@
+name: Reporte de fallos
+description: Crea un reporte de fallo para ayudarnos a mejorar.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tomarte el tiempo de llenar un reporte de fallo. Recuerda completar todos los campos, incluido el título de arriba. 
+        Un problema que no esté correctamente llenado será cerrado.
+  - type: dropdown
+    id: client
+    attributes:
+      label: ¿Qué cliente usas?
+      options:
+      - enGB
+      - enUS
+      - deDE
+      - esES
+      - esMX
+      - frFR
+      - ruRU
+      - Otro
+    validations:
+      required: true
+  - type: dropdown
+    id: faction
+    attributes:
+      label: Facción
+      options:
+      - Alianza
+      - Horda
+      - Ambas
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Comportamiento Actual
+      description: |
+        Describe el fallo en detalle. Base de datos para enlazar hechizos, NPCs, misiones, etc.: https://wowgaming.altervista.org/aowow/
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento Blizzlike Esperado
+      description: |
+        Describe cómo debería funcionar sin el fallo. Incluye evidencia si es posible, como videos de YouTube o comentarios de Wowhead de la época.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Fuente
+      description: |
+        ATENCIÓN: Incluye fuentes en tu reporte de fallo que sean relevantes para la versión del juego 3.3.5a.
+        Cerraremos cualquier reporte de fallo como "X debería cambiarse a Y" presentado sin fuentes.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Pasos para reproducir el problema
+      description: |
+        Describe con precisión cómo reproducir el fallo para que podamos solucionarlo o confirmar su existencia:
+        - ¿Qué comandos usar?
+        - ¿A qué NPC teletransportarse?
+        - Otros pasos
+        - Usa los comandos del juego para identificar el GUID único de un mineral/herbajo/NPC: .npcinfo / .gobject near
+      placeholder: |
+        1. 
+        2. 
+        3. 
+        4. 
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Notas Adicionales
+      description: |
+        Cualquier información que pueda ayudar a los desarrolladores a identificar y solucionar el problema debe incluirse aquí.
+        Ejemplos:
+        Enlaces a objetos/NPCs/misiones de https://wowgaming.altervista.org/aowow/
+      placeholder: |
+        Ninguna
+    validations:
+      required: false
+  - type: textarea
+    id: commit
+    attributes:
+      label: AC rev. hash/commit
+      value: |
+        https://github.com/azerothcore/azerothcore-wotlk/commit/0ba59c0053ce
+    validations:
+      required: true
+  - type: textarea
+    id: os
+    attributes:
+      label: Sistema operativo
+      value: |
+        Ubuntu 24.04
+    validations:
+      required: true
+  - type: textarea
+    id: modules
+    attributes:
+      label: Módulos
+      value: |
+        - [mod-individual-xp](https://github.com/azerothcore/mod-individual-xp)
+        - [mod-enabled-commands](https://github.com/pangolp/mod-enabled-commands)
+        - [mod-npc-promotion](https://github.com/pangolp/mod-npc-promotion)
+        - [mod-quest-loot-party](https://github.com/pangolp/mod-quest-loot-party)
+    validations:
+      required: false
+  - type: textarea
+    id: customizations
+    attributes:
+      label: Personalizaciones
+      value: |
+        Ninguna
+    validations:
+      required: false
+  - type: textarea
+    id: server
+    attributes:
+      label: Servidor
+      value: |
+        AdonisWOW
+    validations:
+      required: false
