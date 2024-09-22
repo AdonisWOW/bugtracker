@@ -1,15 +1,36 @@
-name: issue-labeler
+name: Issue Labeler
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  automate-issues-labels:
+  add-label:
     runs-on: ubuntu-latest
     steps:
-      - name: initial labeling
-        uses: andymckay/labeler@master
+      - name: Add label to the issue
+        uses: actions/github-script@v6
         with:
-          add-labels: "Sin confirmar"
-          ignore-if-labeled: true
+          script: |
+            const label = 'Sin confirmar';
+            const issue_number = context.issue.number;
+            const { data: labels } = await github.issues.listLabelsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            if (!labels.some(l => l.name === label)) {
+              await github.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: label,
+                color: 'd93f0b', // Color del label actualizado
+              });
+            }
+
+            await github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              labels: [label],
+            });
