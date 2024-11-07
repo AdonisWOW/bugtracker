@@ -90,7 +90,7 @@ body:
     attributes:
       label: AC rev. hash/commit
       value: |
-        https://github.com/azerothcore/azerothcore-wotlk/commit/0ba59c0053ce
+        https://github.com/azerothcore/azerothcore-wotlk/commit/88db984e52b2c0daf533c6a1ef769a3d50d7347c
     validations:
       required: true
   - type: textarea
