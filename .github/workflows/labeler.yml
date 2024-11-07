@@ -1,36 +1,18 @@
-name: Issue Labeler
-
+name: Label issues
 on:
   issues:
-    types: [opened]
-
+    types:
+      - reopened
+      - opened
 jobs:
-  add-label:
+  label_issues:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - name: Add label to the issue
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const label = 'Sin confirmar';
-            const issue_number = context.issue.number;
-            const { data: labels } = await github.issues.listLabelsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-
-            if (!labels.some(l => l.name === label)) {
-              await github.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: label,
-                color: 'd93f0b', // Color del label actualizado
-              });
-            }
-
-            await github.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number,
-              labels: [label],
-            });
+      - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          LABELS: Sin confirmar
